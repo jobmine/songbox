@@ -3,21 +3,23 @@ Songwriting - a DWD Project
 
 Songwriting web app
 A simple way to write song ideas in and organise them (notes+audio snippets).
+With future possibilities (after the final submission, if ever) to suggest matches between unfinished song elements.
 
 Some existing solutions are:
 - https://songcraft.io/ - an amazing songwriting tool with different functionalities;  
 - generic note-taking apps across platforms (like Evernote) - a somewhat awkward flow for the specific task of embedding audio snippets;
 - well, pen and paper - works great for lyrics, but hard to notate music for songwriters without knowledge of notation; sometimes can be too disorganized;
-I did a quick search across online forums to check my assumptions and see if there's an actual demand for something like this, and what features it could have.
+A quick search across online forums shows there might be an actual demand for something like this.
 
-Taking into account our timeframe and technical capabilities, the idea is to aim for simplicity, with limited features and have a focus different from what existing tools do.
+Taking into account the timeframe and technical capabilities, the idea is to aim for simplicity, with limited features and have a focus different from what existing tools do.
 
 So the possible scope for now, for what the app would allow:
 - writing lyrics (text)
-- (?) possibly a separate line above to mark down chords alongside
+[- a separate line above to mark down chords alongside]
 - embed audio snippets (directly within text body)
-- add tags (blocks?) for structure - Verse, Chorus, Bridge, etc.
+- add tags or blocks for structure - Verse, Chorus, Bridge, etc.
 - add tags for style/instrument/mood (this would make it easier to deal with the bunches of standalone song pieces*)
+
 Should be mobile-responsive ( with the ability to record directly from a mobile device).
 
 *outside of the scope of the current project - but this gives the option for users to receive suggestions about what song parts might fit together. Better than scouring hundreds of little song snippets called "Untitled" or "aarghftpf123" ^^
