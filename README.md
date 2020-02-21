@@ -15,7 +15,7 @@ Aim for:
 - limited features;
 - focus different from what existing tools do; (tagging&recommendations)
 
-Possible scope:
+Features:
 - writing lyrics (text)
 [- a separate line above to mark down chords alongside]
 - embed audio snippets (directly within text body)
