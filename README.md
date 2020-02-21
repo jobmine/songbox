@@ -1,7 +1,6 @@
-# songwriting
-Songwriting - a DWD Project
+# Songwriting web app
+A DWD Project
 
-Songwriting web app
 A simple way to write song ideas in and organise them (notes+audio snippets).
 With future possibilities (after the final submission, if ever) to suggest matches between unfinished song elements.
 
@@ -11,9 +10,12 @@ Some existing solutions are:
 - well, pen and paper - works great for lyrics, but hard to notate music for songwriters without knowledge of notation; sometimes can be too disorganized;
 A quick search across online forums shows there might be an actual demand for something like this.
 
-Taking into account the timeframe and technical capabilities, the idea is to aim for simplicity, with limited features and have a focus different from what existing tools do.
+Aim for:
+- simplicity (&usability);
+- limited features;
+- focus different from what existing tools do; (tagging&recommendations)
 
-So the possible scope for now, for what the app would allow:
+Possible scope:
 - writing lyrics (text)
 [- a separate line above to mark down chords alongside]
 - embed audio snippets (directly within text body)
