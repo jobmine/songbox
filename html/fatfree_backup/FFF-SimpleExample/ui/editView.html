@@ -1,0 +1,15 @@
+
+<a href="{{ @BASE }}/dashboard">Back</a> <h2>Edit songs:</h2>
+
+<form id="form1" name="form1" method="post" action="{{ @BASE }}/editView">
+	<select name="Delete" size="10">
+		<repeat group="{{ @dbData }}" value="{{ @record }}">
+			<option value="{{ @record.id }}">
+				{{ @record.id }}: {{ @record.songname }}: {{ @record.tag }}
+			</option>
+		</repeat>
+	</select>
+
+	<p><input type="submit" name="delete" value="Delete" /></p>
+</form>
+<hr />
