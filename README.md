@@ -17,7 +17,7 @@ Aim for:
 
 Features:
 - writing lyrics (text)
-[- a separate line above to mark down chords alongside]
+//- a separate line above to mark down chords alongside//
 - embed audio snippets (directly within text body)
 - add tags or blocks for structure - Verse, Chorus, Bridge, etc.
 - add tags for style/instrument/mood (this would make it easier to deal with the bunches of standalone song pieces*)
