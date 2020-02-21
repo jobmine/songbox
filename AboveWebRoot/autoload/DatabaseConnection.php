@@ -6,9 +6,9 @@ class DatabaseConnection {
 
 	static function connect() {
 		  return new DB\SQL(
-			'mysql:host=playground.eca.ed.ac.uk;port=3306;dbname=s2006146',
-			's2006146',
-			'ZypdgMQ6Qh'
+			'mysql:localhost=127.0.0.1;port=3306;dbname=db',
+			'root',
+			'thisisApass#'
 		  );
 	}
 
