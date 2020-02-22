@@ -55,10 +55,9 @@ $f3->route('POST /simpleform',
 
   	$controller = new SimpleController;
     $controller->putIntoDatabase($formdata);
+    $f3->set("dbData", $alldata);
 
-    $f3->set('html_title','Dashboard');
-    $f3->set('content','dashboard.html');
-    echo template::instance()->render('layout.html');
+    $f3->reroute('/dashboard');
 
 
     /////// Response template /////////
@@ -66,8 +65,8 @@ $f3->route('POST /simpleform',
 	 //$f3->set('formData',$formdata);		// set info in F3 variable for access in response template
 
   //$f3->set('html_title','Simple Example Response');
-	//$f3->set('content','response.html');
-	//echo template::instance()->render('layout.html');
+	///$f3->set('content','response.html');
+	///echo template::instance()->render('layout.html');
   }
 );
 
