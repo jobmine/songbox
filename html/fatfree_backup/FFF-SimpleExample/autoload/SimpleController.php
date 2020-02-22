@@ -36,14 +36,8 @@ class SimpleController {
 	public function editFromDatabase($currentID) {
 		$this->mapper->load(['id=?', $currentID]);
 		$this->mapper->copyFrom('POST');
-		$this->mapper->update();									// save new record with these fields
+		$this->mapper->update();									// update records
 	}
-
-	//public function editFromDatabase($currentID) {
-		//$this->mapper->load(array('id=?', $currentID));				// load DB record matching the given ID
-	//$this->mapper->copyFrom('POST');
-		//$this->mapper->update();
-	//}
 
 
 }

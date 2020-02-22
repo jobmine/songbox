@@ -1,5 +1,6 @@
 <h2>Dashboard</h2>
 Here's your existing songs.
+
 <table>
 	<tr>
 		<th>#</th><th>Song</th><th>Tag</th><th>   </th><th>   </th>
@@ -17,7 +18,7 @@ Here's your existing songs.
 			</td>
 
 			<td><form id="editform" name="editform" method="get" action="<?= $BASE ?>/simpleformReq">
-			  <input type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">
+			  <input type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">									<!-- hidden record that passes on the #id value -->
 				<input type="submit" name="edit" value="Edit" />
 			</form>
 			</td>

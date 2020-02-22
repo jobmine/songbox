@@ -56,11 +56,18 @@ $f3->route('POST /simpleform',
   	$controller = new SimpleController;
     $controller->putIntoDatabase($formdata);
 
-	$f3->set('formData',$formdata);		// set info in F3 variable for access in response template
+    $f3->set('html_title','Dashboard');
+    $f3->set('content','dashboard.html');
+    echo template::instance()->render('layout.html');
 
-    $f3->set('html_title','Simple Example Response');
-	$f3->set('content','response.html');
-	echo template::instance()->render('layout.html');
+
+    /////// Response template /////////
+    //////////////////////////////////
+	 //$f3->set('formData',$formdata);		// set info in F3 variable for access in response template
+
+  //$f3->set('html_title','Simple Example Response');
+	//$f3->set('content','response.html');
+	//echo template::instance()->render('layout.html');
   }
 );
 
@@ -72,12 +79,10 @@ $f3->route('GET /simpleformReq',
     //echo $thisRecord;
     //$f3->set("hereThisRecord", $thisRecord);
 
-    $currentID = $f3->get('GET.toEdit');
-    echo $currentID;
+    $currentID = $f3->get('GET.toEdit');                          // get the requested ID from hidden form element
 
     $thisRecord = $controller->loadFromDatabase($currentID);      // in this case, edit selected data record
     $f3-> set('hereThisRecord',$thisRecord);
-    //echo $thisRecord;
 
     $f3->set('html_title','Simple Form Edit');
 	$f3->set('content','simpleformReq.html');
@@ -85,11 +90,10 @@ $f3->route('GET /simpleformReq',
   }
 );
 
-$f3->route('POST /simpleformReq',
+$f3->route('POST /simpleformReq',                                 // edit songs
   function($f3) {
 
-    $currentID = $f3->get('POST.toEdit');
-    echo $currentID;
+    $currentID = $f3->get('POST.toEdit');                         // get the requested ID from hidden form element
 
     $controller = new SimpleController;
     $controller->editFromDatabase($currentID);
@@ -105,6 +109,7 @@ $f3->route('GET /dashboard',
   	$controller = new SimpleController;
     $alldata = $controller->getData();
     $f3->set("dbData", $alldata);
+
     $f3->set('html_title','Dashboard');
     $f3->set('content','dashboard.html');
     echo template::instance()->render('layout.html');
