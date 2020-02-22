@@ -16,7 +16,7 @@ Here's your existing songs.
 			</form>
 			</td>
 
-			<td><form id="editform" name="editform" method="post" action="<?= $BASE ?>/simpleformReq">
+			<td><form id="editform" name="editform" method="get" action="<?= $BASE ?>/simpleformReq">
 			  <input type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">
 				<input type="submit" name="edit" value="Edit" />
 			</form>

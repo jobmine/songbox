@@ -13,8 +13,8 @@ class SimpleController {
 
 	public function putIntoDatabase($data) {
 		$this->mapper->songname = $data["songname"];					// set value for "name" field
-		$this->mapper->tag = $data["tag"];				// set value for "colour" field
-		$this->mapper->textarea = $data["textarea"];				// set value for "address" field
+		$this->mapper->textarea = $data["textarea"];				// set value for "colour" field
+		$this->mapper->tag = $data["tag"];				// set value for "address" field
 		$this->mapper->save();									// save new record with these fields
 	}
 
@@ -29,9 +29,22 @@ class SimpleController {
 	}
 
 	public function loadFromDatabase($currentID) {
-		$this->mapper->load(['id=?', $currentID]);				// load DB record matching the given ID
-
+		$record = $this->mapper->load(['id=?', $currentID]);				// load DB record matching the given ID
+		return $record;
 	}
+
+	public function editFromDatabase($currentID) {
+		$this->mapper->load(['id=?', $currentID]);
+		$this->mapper->copyFrom('POST');
+		$this->mapper->update();									// save new record with these fields
+	}
+
+	//public function editFromDatabase($currentID) {
+		//$this->mapper->load(array('id=?', $currentID));				// load DB record matching the given ID
+	//$this->mapper->copyFrom('POST');
+		//$this->mapper->update();
+	//}
+
 
 }
 

@@ -19,7 +19,7 @@ $f3->set('DB', $db);
 $f3->set('DEBUG',3);		// set maximum debug level
 $f3->set('UI','ui/');		// folder for View templates
 
-//$f3->set('idCurrent',0); //set variable to put @record.id (# song ID) in for simpleformReq (edit screen for songs)
+//$f3->set('currentID',0); //set a variable to put # song ID in for simpleformReq (edit screen for songs)
 
   /////////////////////////////////////////////
  // Simple Example URL application routings //
@@ -64,26 +64,41 @@ $f3->route('POST /simpleform',
   }
 );
 
-$f3->route('POST /simpleformReq',
+$f3->route('GET /simpleformReq',
   function($f3) {
     $controller = new SimpleController;
 
-    $currentID = $f3->get('POST.toEdit');
+    //$thisRecord = $controller->getData([$currentID]);
+    //echo $thisRecord;
+    //$f3->set("hereThisRecord", $thisRecord);
+
+    $currentID = $f3->get('GET.toEdit');
     echo $currentID;
 
-    $thisRecord = $controller->getData([$currentID]);
-    echo $thisRecord;
-    $f3->set("hereThisRecord", $thisRecord);
-    echo $thisRecord;
-
-    //$thisRecord = $controller->loadFromDatabase($currentID);      // in this case, edit selected data record
-    //$f3-> set("hereThisRecord",$thisRecord);
+    $thisRecord = $controller->loadFromDatabase($currentID);      // in this case, edit selected data record
+    $f3-> set('hereThisRecord',$thisRecord);
+    //echo $thisRecord;
 
     $f3->set('html_title','Simple Form Edit');
 	$f3->set('content','simpleformReq.html');
 	echo template::instance()->render('layout.html');
   }
 );
+
+$f3->route('POST /simpleformReq',
+  function($f3) {
+
+    $currentID = $f3->get('POST.toEdit');
+    echo $currentID;
+
+    $controller = new SimpleController;
+    $controller->editFromDatabase($currentID);
+
+    $f3->reroute('/dashboard'); 		// will show edited data (GET route)
+}
+
+);
+
 
 $f3->route('GET /dashboard',
   function($f3) {
@@ -114,6 +129,10 @@ $f3->route('POST /dashboard',		// this is used when the form is submitted, i.e. 
 
 	$f3->reroute('/dashboard');  }		// will show edited data (GET route)
 );
+
+
+
+
 
 
   ////////////////////////

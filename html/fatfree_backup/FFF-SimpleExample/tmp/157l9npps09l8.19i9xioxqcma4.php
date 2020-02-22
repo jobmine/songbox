@@ -3,16 +3,16 @@ A very simple input form View template:
 note that the form method is POST, and the action
 is the URL for the route that handles form input.
  -->
+<form>
 
-
+</form>
 
  <p><a href="<?= $BASE ?>/dashboard">Back</a> <button id="recordButton">Record/Stop</button> </p>
-<form id="form1" name="form1" method="post" action="<?= $BASE ?>/simpleform">
-          <?php foreach (($hereThisRecord[$currentID]?:[]) as $record): ?><?php endforeach; ?>
+<form id="form1" name="form1" method="post" action="<?= $BASE ?>/simpleformReq">
 
-          <input name="songname" type="text" value="<?= $record['songname'] ?>" id="songname" size="50">
+          <input name="songname" type="text" value="<?= $hereThisRecord['songname'] ?>" id="songname" size="50">
           <br> <br>
-          <textarea name="textarea" rows="5" cols="50" id="textarea"> <?= $record['textarea'] ?> </textarea>
+          <textarea name="textarea" rows="5" cols="50" id="textarea"> "<?= $hereThisRecord['textarea'] ?>" </textarea>
 
 <p>Choose a tag:
   <select name="tag" id="tag">
@@ -22,6 +22,7 @@ is the URL for the route that handles form input.
   </select>
 </p>
 <p>
+  <input type="hidden" name="toEdit" value="<?= $hereThisRecord['id'] ?>">
   <input type="submit" name="Submit" value="Submit" />
 </p>
 
