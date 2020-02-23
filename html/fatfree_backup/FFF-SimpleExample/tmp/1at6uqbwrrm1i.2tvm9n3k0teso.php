@@ -53,6 +53,6 @@
 </div> <!--end of MAIN CONTAINER - layout-->
 
 <div class="footer">
-<span> © 2020 All Rights Reserved</span> <br>
+<span> © 2020 All Rights Reserved</span>
 <span> Designed by Damyana S. </span>
  </div> <!--3 footer div -->
