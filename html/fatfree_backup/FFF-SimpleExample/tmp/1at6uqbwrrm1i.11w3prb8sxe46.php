@@ -20,7 +20,7 @@ is the URL for the route that handles form input.
   </select>
 </p>
 <p>
-  <input type="submit" name="Submit" value="Submit" id="submitButton" />
+  <input class="create-btn" type="submit" name="Submit" value="Submit" id="submitButton" />
 </p>
 
 </form>

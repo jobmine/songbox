@@ -1,0 +1,157 @@
+body {
+    font: normal 17px 'Open Sans', 'Helvetica', sans-serif;
+    margin:0px;
+}
+
+h2 {
+  font-size:25px;
+  font-family:'Martel',serif;
+}
+
+button {
+    padding: 0.7rem;
+    font-weight:500;
+    font-size:17px;
+    font-family:'Open Sans',serif;
+    background-color: transparent;
+    border-width: 0.1rem;
+    border-color: rgba(	86, 68, 93,0.7);
+}
+
+/*nav bar**/
+div.navbar {
+     display:flex;
+     justify-content: space-between;
+     align-items: center;
+     height:5rem;
+     background-color:rgba(113,128,150,0.7);
+     filter:blur(0.3);
+ }
+
+ /*div around signup buttons in navbar */
+div.signup {
+    padding-right:3rem;
+}
+
+/*title (logo)*/
+span.web-title {
+    padding-left: 2.5rem;
+    font-weight:700;
+    font-size:25px;
+    font-family:'Martel',serif;
+}
+
+/*Divs for Dashboard page */
+/*/////////////////////////*/
+div.main {    /* main container div! flexbox */
+display:flex;
+flex-direction:row;
+align-items: space-between;
+}
+
+div.left-margin, div.right-margin { /*side divs (to form layout)*/
+  height:200px;
+  width:240px;
+}
+
+div.center {                      /*center div - layout*/
+  flex-grow:1;
+  display: block;
+}
+
+form.sameline {                   /*form buttons - put on same line*/
+  display:inline-block;
+}
+
+div.songrow {                   /*div around whole "song row" */
+  border-bottom-style: solid;
+  border-width:0.1rem;
+  border-color: rgba(113,128,150,0.7);
+}
+
+div.songrow p {
+  display:inline-block;
+}
+
+div.formbox {    /*div around buttons*/
+  display:inline-block;
+  margin: 1rem 2rem 1rem 2rem;
+}
+/*end of Divs for Dashboard page */
+/*/////////////////////////*/
+
+
+form.sameline input { /* margins around buttons*/
+  margin-left:0.3rem;
+}
+
+/*song ID & TAG styling*/
+span.id {
+  color: rgba(113,128,150,1);
+}
+
+span.tag {
+  color: rgba(113,128,150,1);
+  font-size: 14px;
+}
+
+/*style EDIT & DELETE buttons*/
+input, #recordButton {
+      padding: 0.3rem;
+      font-weight:500;
+      font-size:14px;
+      font-family:'Open Sans',serif;
+      background-color: transparent;
+      border-width: 0.09rem;
+      border-color: rgba(113,128,150,0.7);
+      color: rgba(113,128,150,1);
+}
+
+input:hover, #recordButton:hover {
+      padding: 0.3rem;
+      font-weight:500;
+      font-size:14px;
+      font-family:'Open Sans',serif;
+      background-color: transparent;
+      border-width: 0.1rem;
+      border-color: rgba(	143, 188, 148, 1);
+      color: rgba(0,0,0,1);
+}
+
+button.invisible-border {
+      border-width: 0;
+}
+
+/* style CREATE button on dashboard, and SUBMIT within the create and edit screens*/
+form input.create-btn {
+    margin: 3rem 0rem;
+    padding: 0.7rem;
+    font-weight:600;
+    font-size:17px;
+    font-family:'Martel',serif;
+    background-color: transparent;
+    border-width: 0.2rem;
+    border-color: rgba(	143, 188, 148, 1);
+    color: rgba(0, 0, 0, 1);
+}
+
+form input.create-btn:hover {
+    font-weight:600;
+    font-size:17px;
+    font-family:'Martel',serif;
+    background-color:rgba(113,128,150,1);
+    border-width: 0.3rem;
+    border-color: rgba(	143, 188, 148, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+div.footer {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    font-size:12px;
+    height:9rem;
+    background-color:rgba(113,128,150,0.7);
+    filter:blur(0.3);
+}

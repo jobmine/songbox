@@ -1,30 +1,58 @@
-<h2>Dashboard</h2>
-Here's your existing songs.
+<div class="navbar"> 	<!-- navbar div -->
+	<span class="web-title">Songbox</span>
+	<div class="signup">
+		<button class="invisible-border" type="button">Sign in</button>
+		<button type="button">Sign up</button>
+	</div>
+</div>
 
-<table>
-	<tr>
-		<th>#</th><th>Song</th><th>Tag</th><th>   </th><th>   </th>
-	</tr>
-	<?php foreach (($dbData?:[]) as $record): ?>
-		<tr>
-			<td><?= trim($record['id']) ?></td>
-			<td><?= trim($record['songname']) ?></td>
-			<td><?= trim($record['tag']) ?></td>
+<div class=main>						<!--2 MAIN CONTAINER -layout -->
 
-			<td><form id="deleteform" name="deleteform" method="post" action="<?= $BASE ?>/dashboard">
-			  <input type="hidden" name="toDelete" value="<?= trim($record['id']) ?>">
-				<input type="submit" name="delete" value="Delete" />
-			</form>
-			</td>
 
-			<td><form id="editform" name="editform" method="get" action="<?= $BASE ?>/simpleformReq">
-			  <input type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">									<!-- hidden record that passes on the #id value -->
-				<input type="submit" name="edit" value="Edit" />
-			</form>
-			</td>
+	<div class=left-margin> 	<!-- leftdiv - layout -->
+	</div>
 
-		</tr>
-	<?php endforeach; ?>
-</table>
+	<div class=center> 				<!-- center div - layout -->
+	<h2>Dashboard</h2>
+	<p>Here's your existing songs.</p>
 
-<p><a href="<?= $BASE ?>/simpleform">Create another song</a></p>
+
+			<?php foreach (($dbData?:[]) as $record): ?>
+
+			<div class="songrow">
+					<span class="id"> <?= trim($record['id']) ?> </span>
+					<span><?= trim($record['songname']) ?> </span>
+					<span class="tag"><?= trim($record['tag']) ?></span>
+
+					<div class="formbox">
+						<form class="sameline" id="deleteform" name="deleteform" method="post" action="<?= $BASE ?>/dashboard">
+						  <input type="hidden" name="toDelete" value="<?= trim($record['id']) ?>">
+							<input type="submit" name="delete" value="Delete" />
+						</form>
+
+						<form class="sameline" id="editform" name="editform" method="get" action="<?= $BASE ?>/simpleformReq">
+						  <input type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">									<!-- hidden record that passes on the #id value -->
+							<input type="submit" name="edit" value="Edit" />
+						</form>
+					</div>
+
+				</p>
+			</div>
+
+			<?php endforeach; ?>
+
+<form name="go" method="get" action="<?= $BASE ?>/simpleform">									<!-- hidden record that passes on the #id value -->
+	<input class="create-btn" type="submit" name="create-btn" value="Create Song" />
+</form>
+
+</div>
+
+	<div class=right-margin> <!-- right div - layout -->
+	</div>
+
+</div> <!--end of MAIN CONTAINER - layout-->
+
+<div class="footer">
+<span> © 2020 All Rights Reserved</span> <br>
+<span> Designed by Damyana S. </span>
+ </div> <!--3 footer div -->
