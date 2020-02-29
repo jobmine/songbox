@@ -134,6 +134,24 @@ $f3->route('POST /dashboard',		// this is used when the form is submitted, i.e. 
 	$f3->reroute('/dashboard');  }		// will show edited data (GET route)
 );
 
+/////other links - to dummy login/register screens ///
+/////////////////////////////////////////////////////
+$f3->route('GET /dummy_login',                ///Log in///
+  function($f3) {
+        $f3->set('html_title','Songwritin - Log in');
+        $f3->set('content','dummy_login.html');
+        echo template::instance()->render('layout.html');
+}
+);
+
+$f3->route('GET /dummy_register',              ///Register///
+  function($f3) {
+        $f3->set('html_title','Songwritin - Register');
+        $f3->set('content','dummy_register.html');
+        echo template::instance()->render('layout.html');
+}
+);
+
 
 
 
