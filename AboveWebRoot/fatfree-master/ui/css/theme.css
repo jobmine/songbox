@@ -44,6 +44,11 @@ img {
 	max-width:100%
 }
 
+
+form.sameline {
+  display:inline-block;
+}
+
 table {
 	font-size:.8em;
 	color:#666 !important;

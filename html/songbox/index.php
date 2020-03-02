@@ -8,10 +8,10 @@
 // These are available to the routing code below, but also to any
 // classes defined in autoloaded definitions
 
-$f3 = require('../../../AboveWebRoot/fatfree-master/lib/base.php');
+$f3 = require('../../AboveWebRoot/fatfree-master/lib/base.php');
 
 // autoload Controller class(es) and anything hidden above web root, e.g. DB stuff
-$f3->set('AUTOLOAD','autoload/;../../../AboveWebRoot/autoload/');
+$f3->set('AUTOLOAD','autoload/;../../AboveWebRoot/autoload/');
 
 $db = DatabaseConnection::connect();		// defined as autoloaded class in AboveWebRoot/autoload/
 $f3->set('DB', $db);
@@ -28,8 +28,8 @@ $f3->set('UI','ui/');		// folder for View templates
 //home page (index.html) -- actually just shows form entry page with a different title
 $f3->route('GET /',
   function ($f3) {
-    $f3->set('html_title','Simple Example Home');
-    $f3->set('content','simpleHome.html');
+    $f3->set('html_title','Home - SongBox');
+    $f3->set('content','homepage.html');
     echo Template::instance()->render('layout.html');
   }
 );
@@ -37,7 +37,7 @@ $f3->route('GET /',
 // When using GET, provide a form for the user to upload an image via the file input type
 $f3->route('GET /simpleform',
   function($f3) {
-    $f3->set('html_title','Simple Input Form');
+    $f3->set('html_title','Dashboard - SongBox');
     $f3->set('content','simpleform.html');
     echo template::instance()->render('layout.html');
   }
@@ -109,7 +109,7 @@ $f3->route('GET /dashboard',
     $alldata = $controller->getData();
     $f3->set("dbData", $alldata);
 
-    $f3->set('html_title','Dashboard');
+    $f3->set('html_title','Dashboard - SongBox');
     $f3->set('content','dashboard.html');
     echo template::instance()->render('layout.html');
   }
@@ -132,6 +132,24 @@ $f3->route('POST /dashboard',		// this is used when the form is submitted, i.e. 
     $controller->deleteFromDatabase($f3->get('POST.toDelete'));		// in this case, delete selected data record
 
 	$f3->reroute('/dashboard');  }		// will show edited data (GET route)
+);
+
+/////other links - to dummy login/register screens ///
+/////////////////////////////////////////////////////
+$f3->route('GET /dummy_login',                ///Log in///
+  function($f3) {
+        $f3->set('html_title','Sign In - SongBox');
+        $f3->set('content','dummy_login.html');
+        echo template::instance()->render('layout.html');
+}
+);
+
+$f3->route('GET /dummy_register',              ///Register///
+  function($f3) {
+        $f3->set('html_title','Registeration - SongBox');
+        $f3->set('content','dummy_register.html');
+        echo template::instance()->render('layout.html');
+}
 );
 
 
