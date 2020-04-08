@@ -12,6 +12,7 @@ $f3 = require('../../AboveWebRoot/fatfree-master/lib/base.php');
 
 // autoload Controller class(es) and anything hidden above web root, e.g. DB stuff
 $f3->set('AUTOLOAD','autoload/;../../AboveWebRoot/autoload/');
+$f3->set('UPLOADS','../../../AboveWebRoot/AudioSnippets/'); // set uploads folder
 
 $db = DatabaseConnection::connect();		// defined as autoloaded class in AboveWebRoot/autoload/
 $f3->set('DB', $db);
@@ -58,6 +59,17 @@ $f3->route('POST /simpleform',
     $f3->set("dbData", $alldata);
 
     $f3->reroute('/dashboard');
+
+//////// UPLOAD snippets ///
+$f3->route('POST /clipSave', //from ImageServer code, originally GET|POST /upload/quiet /////
+  function($f3) {
+  	$is = new AudioClips;
+    $filedata = $is->upload();
+    echo json_encode($filedata);
+  }
+);
+///////////////
+
 
 
     /////// Response template /////////

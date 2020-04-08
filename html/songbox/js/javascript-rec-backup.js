@@ -1,5 +1,4 @@
 let playButton;
-let blob;
 
 var recorder, gumStream;
 var chunks=[];
@@ -19,9 +18,9 @@ function toggleRecording() {
             recorder = new MediaRecorder(stream);
             recorder.ondataavailable = function(e) {
                 var url = URL.createObjectURL(e.data);
-                chunks.push(e.data);   //note: blob was const; remove let above//
-                blob = new Blob(chunks, { type:'audio/webm', bitsPerSecond:128000});
-    	          console.log(Blob.type);
+                chunks.push(e.data);
+                const blob = new Blob(chunks, { type:'audio/webm', bitsPerSecond:128000});
+    	           console.log(Blob.type);
                var link = document.createElement('a');
 
              	//link the a element to the blob
@@ -51,32 +50,6 @@ function toggleRecording() {
                 div.appendChild(smallerCardDiv);
                 div.setAttribute("class", "card border-left-primary shadow h-100 ");
               	InsertSongHere.appendChild(div);
-
-                //////check if jQuery is loaded and send audio blob from above to server via AJAX
-                  $(document).ready(function(blob) {
-                    console.log("jQuery loaded");
-
-                    ////start AJAX///
-                      $.ajax({
-                        type: "POST",
-                        data: {"audio":blob},
-                        url: "{{ @BASE }}/clipSave",
-
-                        success: function (textStatus, status) {
-                            console.log(textStatus);
-                            console.log(status);
-                        },
-                        error: function(xhr, textStatus, error) {
-                            console.log(xhr.responseText);
-                            console.log(xhr.statusText);
-                            console.log(textStatus);
-                            console.log(error);
-                        }
-                      });
-                    //////end AJAX ///
-
-                  });
-
             };
             recorder.start();
         });
@@ -87,7 +60,7 @@ function toggleRecording() {
 
 //////////////////////////////////
 
-///playButton = document.getElementById("playButton");
+playButton = document.getElementById("playButton");
 
-//playButton.addEventListener("click", playAudio);
-//var audioPlayer = document.getElementById('player');
+playButton.addEventListener("click", playAudio);
+var audioPlayer = document.getElementById('player');
