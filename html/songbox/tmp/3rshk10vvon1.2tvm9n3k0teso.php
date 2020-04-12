@@ -1,9 +1,12 @@
 <div id="wrapper">
    <!-- SIDE BAR -->
-   <check if="{{ @SESSION.userName=='UNSET' }}">
-      <false>
+   <?php if ($SESSION['userName']=='UNSET'): ?>
+      
+         <script>window.location = "<?= $BASE ?>/dummy_login/unauthorized";</script>
+      
+      <?php else: ?>
          <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ @BASE }}/dashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $BASE ?>/dashboard">
                <div class="sidebar-brand-icon rotate-n-15">
                   <i class="fas fa-signature"></i>
                </div>
@@ -11,7 +14,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-               <a class="nav-link" href="{{ @BASE }}/dashboard">
+               <a class="nav-link" href="<?= $BASE ?>/dashboard">
                <i class="fas fa-fw fa-tachometer-alt"></i>
                <span>Dashboard</span>
                </a>
@@ -21,11 +24,11 @@
                Submission One
             </div>
             <li class="nav-item">
-               <a class="nav-link" target="_blank" href="{{ @BASE }}/SongBox.pdf">
+               <a class="nav-link" target="_blank" href="<?= $BASE ?>/SongBox.pdf">
                <i class="fas fa-fw fa-file-pdf"></i>
                <span>PDF Report</span>
                </a>
-               <a class="nav-link pt-0" target="_blank" href="{{ @BASE }}/SongBox.mp4">
+               <a class="nav-link pt-0" target="_blank" href="<?= $BASE ?>/SongBox.mp4">
                <i class="fas fa-fw fa-file-video"></i>
                <span>Video Walkthrough</span>
                </a>
@@ -35,18 +38,18 @@
                Users
             </div>
             <li class="nav-item">
-               <a class="nav-link collapsed" href="{{ @BASE }}/" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+               <a class="nav-link collapsed" href="<?= $BASE ?>/" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                <i class="fas fa-fw fa-user"></i>
-               <span>Hi {{@SESSION.fname}}!</span>
+               <span>Hi <?= $SESSION['fname'] ?>!</span>
                </a>
                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
                      <h6 class="collapse-header">ready to leave?</h6>
-                     <a class="collapse-item" href="{{ @BASE }}/dummy_login/logout">Logout</a>
+                     <a class="collapse-item" href="<?= $BASE ?>/dummy_login/logout">Logout</a>
                      <div class="collapse-divider"></div>
-                     <h6 class="collapse-header">Not {{@SESSION.fname}}?</h6>
-                     <a class="collapse-item" href="{{ @BASE }}/dummy_login/switch">Switch account</a>
-                     <a class="collapse-item" href="{{ @BASE }}/dummy_register/in">Craete an account</a>
+                     <h6 class="collapse-header">Not <?= $SESSION['fname'] ?>?</h6>
+                     <a class="collapse-item" href="<?= $BASE ?>/dummy_login/switch">Switch account</a>
+                     <a class="collapse-item" href="<?= $BASE ?>/dummy_register/in">Craete an account</a>
                   </div>
                </div>
             </li>
@@ -68,7 +71,7 @@
                               <div class="card bg-light text-gray-800 shadow create-card ">
                                  <div class="card-body text-center mt-4 mb-3">
                                     <span>  </span>
-                                    <form name="go" method="get" action="{{ @BASE }}/simpleform">
+                                    <form name="go" method="get" action="<?= $BASE ?>/simpleform">
                                        <!-- hidden record that passes on the #id value -->
                                        <input class="create-btn btn btn-teal mb-1" type="submit" name="create-btn" value="New Song" />
                                     </form>
@@ -78,30 +81,30 @@
                                  </div>
                               </div>
                            </div>
-                           <repeat group="{{ @dbData }}" value="{{ @record }}">
+                           <?php foreach (($dbData?:[]) as $record): ?>
                               <div class="col-lg-6 mb-4">
                                  <div class="card bg-primary text-white shadow">
                                     <div class="card-body">
-                                       <!-- <span class="id"> {{ trim(@record.id) }} </span> -->
-                                       <form class="strongTitle" id="editform" name="editform" method="get" action="{{ @BASE }}/simpleformReq">
-                                          <input class="btn p-0 pr-4" type="hidden" name="toEdit" value="{{ trim(@record.id) }}">
-                                          <input class="form-control create-btn btn btn-primary strongTitle" type="submit" name="edit" value="{{ trim(@record.songname) }}" />
+                                       <!-- <span class="id"> <?= trim($record['id']) ?> </span> -->
+                                       <form class="strongTitle" id="editform" name="editform" method="get" action="<?= $BASE ?>/simpleformReq">
+                                          <input class="btn p-0 pr-4" type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">
+                                          <input class="form-control create-btn btn btn-primary strongTitle" type="submit" name="edit" value="<?= trim($record['songname']) ?>" />
                                        </form>
-                                       <div class="text-gray-400 small mb-4 text-center">{{ trim(@record.tag) }}</div>
+                                       <div class="text-gray-400 small mb-4 text-center"><?= trim($record['tag']) ?></div>
                                        <div class="buttons">
                                           <div class="container">
                                              <div class="row justify-content-md-center">
                                                 <!-- <div class="col"> -->
-                                                <form class="sameline" id="editform" name="editform" method="get" action="{{ @BASE }}/simpleformReq">
-                                                   <input class="btn p-0 pr-4" type="hidden" name="toEdit" value="{{ trim(@record.id) }}">
+                                                <form class="sameline" id="editform" name="editform" method="get" action="<?= $BASE ?>/simpleformReq">
+                                                   <input class="btn p-0 pr-4" type="hidden" name="toEdit" value="<?= trim($record['id']) ?>">
                                                    <button class="transparent pr-3" id="deleteButton" type="submit" name="edit">
                                                    <i class="fas fa-edit text-gray-400"></i>
                                                    </button>
                                                 </form>
                                                 <!-- 			</div>
                                                    <div class="col"> -->
-                                                <form class="sameline" id="deleteform" name="deleteform" method="post" action="{{ @BASE }}/dashboard">
-                                                   <input class="btn p-0 pr-4" type="hidden" name="toDelete" value="{{ trim(@record.id) }}">
+                                                <form class="sameline" id="deleteform" name="deleteform" method="post" action="<?= $BASE ?>/dashboard">
+                                                   <input class="btn p-0 pr-4" type="hidden" name="toDelete" value="<?= trim($record['id']) ?>">
                                                    <button class="transparent pl-3" id="deleteButton" type="submit" name="delete" >
                                                    <i class="fas fa-trash text-gray-400"></i>
                                                    </button>
@@ -117,7 +120,7 @@
                                  <!-- card end -->
                               </div>
                               <!-- row end -->
-                           </repeat>
+                           <?php endforeach; ?>
                         </div>
                      </div>
                      <div class="col-lg-6 mb-4">
@@ -144,9 +147,6 @@
                </div>
             </footer>
          </div>
-      </false>
-      <true>
-         <script>window.location = "{{ @BASE }}/dummy_login/unauthorized";</script>
-      </true>
-   </check>
+      
+   <?php endif; ?>
 </div>

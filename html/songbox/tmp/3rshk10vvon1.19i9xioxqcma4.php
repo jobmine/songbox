@@ -9,11 +9,14 @@
    is the URL for the route that handles form input.
     -->
 <div id="wrapper">
-   <check if="{{ @SESSION.userName=='UNSET' }}">
-      <false>
+   <?php if ($SESSION['userName']=='UNSET'): ?>
+      
+         <script>window.location = "<?= $BASE ?>/dummy_login/unauthorized";</script>
+      
+      <?php else: ?>
          <!-- SIDE BAR -->
          <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ @BASE }}/dashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $BASE ?>/dashboard">
                <div class="sidebar-brand-icon rotate-n-15">
                   <i class="fas fa-signature"></i>
                </div>
@@ -21,7 +24,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-               <a class="nav-link" href="{{ @BASE }}/dashboard">
+               <a class="nav-link" href="<?= $BASE ?>/dashboard">
                <i class="fas fa-fw fa-tachometer-alt"></i>
                <span>Dashboard</span></a>
             </li>
@@ -30,11 +33,11 @@
                Submission One
             </div>
             <li class="nav-item">
-               <a class="nav-link" target="_blank" href="{{ @BASE }}/SongBox.pdf">
+               <a class="nav-link" target="_blank" href="<?= $BASE ?>/SongBox.pdf">
                <i class="fas fa-fw fa-file-pdf"></i>
                <span>PDF Report</span>
                </a>
-               <a class="nav-link pt-0" target="_blank" href="{{ @BASE }}/SongBox.mp4">
+               <a class="nav-link pt-0" target="_blank" href="<?= $BASE ?>/SongBox.mp4">
                <i class="fas fa-fw fa-file-video"></i>
                <span>Video Walkthrough</span>
                </a>
@@ -44,18 +47,18 @@
                Users
             </div>
             <li class="nav-item">
-               <a class="nav-link collapsed" href="{{ @BASE }}/" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+               <a class="nav-link collapsed" href="<?= $BASE ?>/" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                <i class="fas fa-fw fa-user"></i>
-               <span>Hi {{@SESSION.fname}}!</span>
+               <span>Hi <?= $SESSION['fname'] ?>!</span>
                </a>
                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
                      <h6 class="collapse-header">ready to leave?</h6>
-                     <a class="collapse-item" href="{{ @BASE }}/dummy_login/logout">Logout</a>
+                     <a class="collapse-item" href="<?= $BASE ?>/dummy_login/logout">Logout</a>
                      <div class="collapse-divider"></div>
-                     <h6 class="collapse-header">Not {{@SESSION.fname}}?</h6>
-                     <a class="collapse-item" href="{{ @BASE }}/dummy_login/switch">Switch account</a>
-                     <a class="collapse-item" href="{{ @BASE }}/dummy_register/in">Craete an account</a>
+                     <h6 class="collapse-header">Not <?= $SESSION['fname'] ?>?</h6>
+                     <a class="collapse-item" href="<?= $BASE ?>/dummy_login/switch">Switch account</a>
+                     <a class="collapse-item" href="<?= $BASE ?>/dummy_register/in">Craete an account</a>
                   </div>
                </div>
             </li>
@@ -66,8 +69,8 @@
                <div class="container-fluid mt-4">
                   <div class="d-sm-flex align-items-center mb-4">
                      <!-- was set to justify-content-between -->
-                     <a class="btn-circle btn-lg" href="{{ @BASE }}/dashboard"><i class="fas fa-arrow-circle-left mr-1"></i></a>
-                     <h1 class="h3 mb-0 text-gray-800">Edit Song <i class="text-primary">{{@hereThisRecord.songname}}</i></h1>
+                     <a class="btn-circle btn-lg" href="<?= $BASE ?>/dashboard"><i class="fas fa-arrow-circle-left mr-1"></i></a>
+                     <h1 class="h3 mb-0 text-gray-800">Edit Song <i class="text-primary"><?= $hereThisRecord['songname'] ?></i></h1>
                   </div>
                   <div class="row">
                      <div class="col-lg-6 mb-4">
@@ -76,22 +79,22 @@
                            <div class="card-header py-3">
                               <!--- --------------------------------------------->
                               <!-- form content is split between multiple divs -->
-                              <form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleformReq">
+                              <form id="form1" name="form1" method="post" action="<?= $BASE ?>/simpleformReq">
                                  <!-- start form -->
-                                 <input class="writing m-0 font-weight-bold text-primary no-border border-0" name="songname" type="text" value="{{@hereThisRecord.songname}}" id="songname" size="50">
+                                 <input class="writing m-0 font-weight-bold text-primary no-border border-0" name="songname" type="text" value="<?= $hereThisRecord['songname'] ?>" id="songname" size="50">
                            </div>
                            <div class="card-body">
-                           <textarea class=" border-0 text-gray-900" name="textarea" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
+                           <textarea class=" border-0 text-gray-900" name="textarea" rows="5" cols="50" id="textarea"><?= $hereThisRecord['textarea'] ?></textarea>
                            <!-- undocumented way of inserting php code - f3 framework, brackets + tilda. might not work in some situations? -->
                            <p>Choose a tag:
                            <select name="tag" id="tag">
-                           <option {~ if (@hereThisRecord.tag == "Rock" ) echo  " selected = 'selected' " ;  ~} value="Rock">Rock</option>
-                           <option {~ if (@hereThisRecord.tag == "Blues" ) echo  " selected = 'selected' " ; ~} value="Blues" >Blues</option>
-                           <option {~ if (@hereThisRecord.tag == "Pop" ) echo  " selected = 'selected' " ; ~} value="Pop">Pop</option>
+                           <option <?php if ($hereThisRecord['tag'] == "Rock" ) echo  " selected = 'selected' " ; ?> value="Rock">Rock</option>
+                           <option <?php if ($hereThisRecord['tag'] == "Blues" ) echo  " selected = 'selected' " ; ?> value="Blues" >Blues</option>
+                           <option <?php if ($hereThisRecord['tag'] == "Pop" ) echo  " selected = 'selected' " ; ?> value="Pop">Pop</option>
                            </select>
                            </p>
                            <p>
-                           <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}">               <!-- //hidden record that passes on the #id value -->
+                           <input type="hidden" name="toEdit" value="<?= $hereThisRecord['id'] ?>">               <!-- //hidden record that passes on the #id value -->
                            <input class="create-btn" type="submit" name="Submit" value="Submit" id="submitEditButton" />
                            </p>
                            </form>                                                                     <!-- end form -->
@@ -224,10 +227,7 @@
                </div>
             </footer>
          </div>
-      </false>
-      <true>
-         <script>window.location = "{{ @BASE }}/dummy_login/unauthorized";</script>
-      </true>
-   </check>
+      
+   <?php endif; ?>
 </div>
 <script src="js/javascript-rec.js"></script>

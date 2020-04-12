@@ -6,10 +6,10 @@
                <a class="navbar-brand text-white">SongBox</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto mr-lg-5">
-                     <li class="nav-item"><a class="nav-link" target="_blank" href="{{ @BASE }}/SongBox.pdf">PDF Report</a></li>
-                     <li class="nav-item"><a class="nav-link" target="_blank" href="{{ @BASE }}/SongBox.mp4">Video Walkthrough</a></li>
+                     <li class="nav-item"><a class="nav-link" target="_blank" href="<?= $BASE ?>/SongBox.pdf">PDF Report</a></li>
+                     <li class="nav-item"><a class="nav-link" target="_blank" href="<?= $BASE ?>/SongBox.mp4">Video Walkthrough</a></li>
                   </ul>
-                  <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="{{ @BASE }}/dummy_login/in">Log In <i class="fas fa-arrow-right ml-1"></i></a>
+                  <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="<?= $BASE ?>/dummy_login/in">Log In <i class="fas fa-arrow-right ml-1"></i></a>
                </div>
             </div>
          </nav>
@@ -20,7 +20,7 @@
                      <div class="col-lg-6" data-aos="fade-up">
                         <h1 class="page-header-title">A songwriting web app that helps you connect your ideas</h1>
                         <p class="page-header-text mb-5">This is Songbox - no more unfinished, unnamed songs lying at the bottom of a folder. Simple to use and private, a web app that matches your old song ideas and offers suggestions.</p>
-                        <a class="btn btn-teal btn-marketing rounded-pill lift lift-sm" href="{{ @BASE }}/dummy_login/in">Log In <i class="fas fa-arrow-right ml-1"></i></a><a class="btn btn-white btn-link btn-marketing" href="{{ @BASE }}/dummy_register">Sign Up</a>
+                        <a class="btn btn-teal btn-marketing rounded-pill lift lift-sm" href="<?= $BASE ?>/dummy_login/in">Log In <i class="fas fa-arrow-right ml-1"></i></a><a class="btn btn-white btn-link btn-marketing" href="<?= $BASE ?>/dummy_register">Sign Up</a>
                      </div>
                      <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="ui/song-writing-illustration.svg" /></div>
                   </div>

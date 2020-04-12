@@ -4,11 +4,14 @@
    is the URL for the route that handles form input.
    -->
 <div id="wrapper">
-<check if="{{ @SESSION.userName=='UNSET' }}">
-   <false>
+<?php if ($SESSION['userName']=='UNSET'): ?>
+   
+   <script>window.location = "<?= $BASE ?>/dummy_login/unauthorized";</script>
+   
+   <?php else: ?>
       <!-- SIDE BAR -->
       <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ @BASE }}/dashboard">
+         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $BASE ?>/dashboard">
             <div class="sidebar-brand-icon rotate-n-15">
                <i class="fas fa-signature"></i>
             </div>
@@ -16,7 +19,7 @@
          </a>
          <hr class="sidebar-divider my-0">
          <li class="nav-item active">
-            <a class="nav-link" href="{{ @BASE }}/dashboard">
+            <a class="nav-link" href="<?= $BASE ?>/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
          </li>
@@ -25,11 +28,11 @@
             Submission One
          </div>
          <li class="nav-item">
-            <a class="nav-link" target="_blank" href="{{ @BASE }}/SongBox.pdf">
+            <a class="nav-link" target="_blank" href="<?= $BASE ?>/SongBox.pdf">
             <i class="fas fa-fw fa-file-pdf"></i>
             <span>PDF Report</span>
             </a>
-            <a class="nav-link pt-0" target="_blank" href="{{ @BASE }}/SongBox.mp4">
+            <a class="nav-link pt-0" target="_blank" href="<?= $BASE ?>/SongBox.mp4">
             <i class="fas fa-fw fa-file-video"></i>
             <span>Video Walkthrough</span>
             </a>
@@ -39,18 +42,18 @@
             Users
          </div>
          <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ @BASE }}/" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" href="<?= $BASE ?>/" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-user"></i>
-            <span>Hi {{@SESSION.fname}}!</span>
+            <span>Hi <?= $SESSION['fname'] ?>!</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                <div class="bg-white py-2 collapse-inner rounded">
                   <h6 class="collapse-header">ready to leave?</h6>
-                  <a class="collapse-item" href="{{ @BASE }}/dummy_login/logout">Logout</a>
+                  <a class="collapse-item" href="<?= $BASE ?>/dummy_login/logout">Logout</a>
                   <div class="collapse-divider"></div>
-                  <h6 class="collapse-header">Not {{@SESSION.fname}}?</h6>
-                  <a class="collapse-item" href="{{ @BASE }}/dummy_login/switch">Switch account</a>
-                  <a class="collapse-item" href="{{ @BASE }}/dummy_register/in">Craete an account</a>
+                  <h6 class="collapse-header">Not <?= $SESSION['fname'] ?>?</h6>
+                  <a class="collapse-item" href="<?= $BASE ?>/dummy_login/switch">Switch account</a>
+                  <a class="collapse-item" href="<?= $BASE ?>/dummy_register/in">Craete an account</a>
                </div>
             </div>
          </li>
@@ -61,7 +64,7 @@
             <div class="container-fluid mt-4">
                <div class="d-sm-flex align-items-center mb-4">
                   <!-- was set to justify-content-between -->
-                  <a class="btn-circle btn-lg" href="{{ @BASE }}/dashboard"><i class="fas fa-arrow-circle-left mr-1"></i></a>
+                  <a class="btn-circle btn-lg" href="<?= $BASE ?>/dashboard"><i class="fas fa-arrow-circle-left mr-1"></i></a>
                   <h1 class="h3 mb-0 text-gray-800">Create Song</h1>
                </div>
                <div class="row">
@@ -71,7 +74,7 @@
                         <div class="card-header py-3">
                            <!--- --------------------------------------------->
                            <!-- form content is split between multiple divs -->
-                           <form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleform">
+                           <form id="form1" name="form1" method="post" action="<?= $BASE ?>/simpleform">
                               <!-- start form -->
                               <input class="bg-transparent writing m-0 form-control font-weight-bold text-primary no-border border-0" name="songname" type="text" placeholder="Your song name here..." id="songname" size="50">
                         </div>
@@ -251,10 +254,7 @@
                </div>
             </footer>
          </div>
-   </false>
-   <true>
-   <script>window.location = "{{ @BASE }}/dummy_login/unauthorized";</script>
-   </true>
-</check>
+   
+<?php endif; ?>
 </div>
 <script src="js/javascript-rec.js"></script>
