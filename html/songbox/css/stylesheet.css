@@ -11281,8 +11281,14 @@ body.sidebar-toggled footer.sticky-footer {
   opacity: 1;
 }
 
+.strongTitle {
+  font-weight: bold;
+}
 
-
+.transparent {
+  background-color: transparent;
+  border: none;
+}
 
 
 
