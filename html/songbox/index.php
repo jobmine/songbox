@@ -11,7 +11,8 @@
 $f3 = require('../../AboveWebRoot/fatfree-master/lib/base.php');
 
 // autoload Controller class(es) and anything hidden above web root, e.g. DB stuff
-$f3->set('AUTOLOAD', 'autoload/;../../AboveWebRoot/autoload/');
+$f3->set('AUTOLOAD','autoload/;../../AboveWebRoot/autoload/');
+$f3->set('UPLOADS','../../AboveWebRoot/AudioClips/'); // set uploads folder
 
 $db = DatabaseConnection::connect(); // defined as autoloaded class in AboveWebRoot/autoload/
 $f3->set('DB', $db);
@@ -64,19 +65,22 @@ $f3->route('POST /simpleform', function($f3)
     $f3->set("dbData", $alldata);
     
     $f3->reroute('/dashboard');
-    
-    
-    /////// Response template /////////
-    //////////////////////////////////
-    //$f3->set('formData',$formdata);   // set info in F3 variable for access in response template
-    
-    //$f3->set('html_title','Simple Example Response');
-    ///$f3->set('content','response.html');
-    ///echo template::instance()->render('layout.html');
-});
 
-$f3->route('GET /simpleformReq', function($f3)
-{
+  }
+);
+
+//////// UPLOAD snippets ///
+$f3->route('POST /clipSave',
+    function($f3) {
+  	$is = new AudioClips;
+    $filedata = $is->upload();
+    $f3->set('filedata', $filedata); // add filedata to f3 variable??
+    //echo json_encode($filedata);
+  }
+);
+
+$f3->route('GET /simpleformReq',
+  function($f3) {
     $controller = new SimpleController;
     
     //$thisRecord = $controller->getData([$currentID]);
