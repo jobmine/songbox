@@ -28,7 +28,7 @@
                      <div class="pt-2 pb-4">
                         <div class="alert alert-info" role="alert"><?= $message ?></div>
                      </div>
-                     <input type="submit" name="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                     <input type="submit" name="submit" value="Login" class="btn btn-primary btn-user btn-block login-signup">
                   </form>
                   <hr>
                   <div class="text-center">
