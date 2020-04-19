@@ -119,7 +119,7 @@
                         <span class="icon text-white-50">
                         <i class="fas fa-microphone"></i>
                         </span>
-                        <span class="text">Record Audio</span>
+                        <span class="text" id="recordSpan">Record Audio</span>
                         </a>
 
 

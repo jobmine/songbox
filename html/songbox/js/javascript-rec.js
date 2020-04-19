@@ -4,6 +4,7 @@ let clipID;
 
 var recorder, gumStream;
 var chunks=[];
+var recordSpan = document.getElementById("recordSpan") // text in record button
 var recordButton = document.getElementById("recordButton");
 var insertSongHere = document.getElementById("insertHere");
 recordButton.addEventListener("click", toggleRecording);
@@ -15,22 +16,24 @@ function preventDefault (event) {
 }
 
 function toggleRecording() {
+    recordButton.classList.add("lightcolor"); //change button while recording
+    recordSpan.innerHTML=("Recording..."+"  "); //change button while recording
     if (recorder && recorder.state == "recording") {
         recorder.stop(chunks);
         gumStream.getAudioTracks()[0].stop();
 
-        recordButton.classList.remove("lightcolor");
     } else {
         navigator.mediaDevices.getUserMedia({
             audio: true
         }).then(function(stream) {
-            recordButton.classList.add("lightcolor");
             gumStream = stream;
             recorder = new MediaRecorder(stream);
             recorder.ondataavailable = function(e) {
                 chunks.push(e.data);   //note: blob was const; remove let above//
                 console.log("chunks gathered");
                 const blob = new Blob(chunks, {type:'audio/webm', bitsPerSecond:128000});
+                recordButton.classList.remove("lightcolor");  //restore button
+                recordSpan.innerHTML=("Record Audio");  // restore button
 
                 const url = URL.createObjectURL(blob);
                 console.log(url);
@@ -147,12 +150,12 @@ function toggleRecording() {
                          "<div class='row no-gutters align-items-center'>"+
                             "<div class='col mr-2'>"+
                                "<div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>  " + clipTime + " | " + clipDate +      //insert cliptime&clipdate
-                                 "<form class='sameline' id='deleteClipForm' name='deleteClipForm' method='GET' action='/simpleformReq/deleteClip/"+clipID+"'> "+  //insert clip id at the end here
-                                    "<input type='hidden' name='songID' value='"+getURL+"'>"+
-                                    "<button class='transparent pr-3' id='deleteClipButton' name='deleteClip' type='submit'> "+
-                                    "<i class='fas fa-trash text-gray-400'></i> "+
-                                    "</button>"+
-                                 "</form>"+
+                                 //"<form class='sameline' id='deleteClipForm' name='deleteClipForm' method='GET' action='/simpleformReq/deleteClip/"+clipID+"'> "+  //insert clip id at the end here
+                                    //"<input type='hidden' name='songID' value='"+getURL+"'>"+
+                                    //"<button class='transparent pr-3' id='deleteClipButton' name='deleteClip' type='submit'> "+
+                                    "<a href='#'><i class='fas fa-trash text-gray-400'></i> </a>"+
+                                    //"</button>"+
+                                 //"</form>"+
                                "</div>"+
                                "<div class='row no-gutters align-items-center'>"+
                                   "<div class='col-auto'>"+

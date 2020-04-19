@@ -5039,7 +5039,18 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .lightcolor {
   background-color: #ffdd76;
+
 }
+
+.lightcolor:hover {
+  background-color: #ffdd76;
+}
+/*
+#recordButton {
+  width:12%;
+  height:2%;
+  padding: 0 10.4%;
+} */
 
 .progress {
   display: flex;
