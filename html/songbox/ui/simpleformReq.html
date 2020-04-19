@@ -87,13 +87,14 @@
                            <div class="card-header py-3">
                               <!--- --------------------------------------------->
                               <!-- form content is split between multiple divs -->
-                              
+
                               <form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleformReq">
                               <!-- start form -->
                               <input class="bg-transparent writing m-0 form-control font-weight-bold text-primary no-border border-0" name="songname" type="text" value="{{@hereThisRecord.songname}}" id="songname" size="50">
                         </div>
                         <div class="card-body">
-                        <textarea class="bg-transparent m-0 form-control border-0 text-gray-900" name="textarea" rows="10" id="textarea">{{@hereThisRecord.textarea}}</textarea>
+                        <!-- onfocus inline JS to clear dynamically inserted placeholder -->
+                        <textarea class="bg-transparent m-0 form-control border-0 text-gray-900" onfocus="if(this.value == 'Write down your idea here...') {this.value=''}" name="textarea" rows="10" id="textarea">{{@hereThisRecord.textarea}}</textarea>
                         <p class="mt-2">Choose a tag:
                      <!--    <select name="tag" id="tag">
                            <option {~ if (@hereThisRecord.tag == 'Rock' ) echo  " selected = 'selected' " ;  ~} value="Rock">Rock</option>
@@ -111,7 +112,7 @@
                            <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}">
                            <input class="btn bg-gradient-primary submit-button" type="submit" name="Submit" value="Update" id="submitEditButton" />
                         </p>
-                        </form> 
+                        </form>
 
 
 
@@ -121,10 +122,10 @@
                            </div>
                            <div class="card-body">
 
-                           
+
                            <textarea class=" border-0 text-gray-900"  name="textarea" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
-                           <!-- onfocus inline JS to clear dynamically inserted placeholder -->
-                           <textarea class=" border-0 text-gray-900" name="textarea" onfocus="if(this.value == 'Write down your idea here...') {this.value=''}" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
+
+                           <!-- <textarea class=" border-0 text-gray-900" name="textarea" onfocus="if(this.value == 'Write down your idea here...') {this.value=''}" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
 
                            <p>Choose a tag:
                            <select name="tag" id="tag">
@@ -133,12 +134,12 @@
                            <option {~ if (@hereThisRecord.tag == 'Pop' ) echo  " selected = 'selected' " ; ~} value="Pop">Pop</option>
                            </select>
                            <!-- inserting php code - f3 framework, brackets + tilda. -->
-                           </p>
+                           <!-- </p>
                            <p>
-                           <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}"> 
+                           <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}">
                            <input class="create-btn" type="submit" name="Submit" value="Submit" id="submitEditButton" />
                            </p>
-                           </form>  -->     
+                           </form>  -->
                            </div>
                         </div>
                      </div>

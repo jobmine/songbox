@@ -153,7 +153,7 @@ function toggleRecording() {
                                  //"<form class='sameline' id='deleteClipForm' name='deleteClipForm' method='GET' action='/simpleformReq/deleteClip/"+clipID+"'> "+  //insert clip id at the end here
                                     //"<input type='hidden' name='songID' value='"+getURL+"'>"+
                                     //"<button class='transparent pr-3' id='deleteClipButton' name='deleteClip' type='submit'> "+
-                                    "<a href='#'><i class='fas fa-trash text-gray-400'></i> </a>"+
+                                    "<a><i class='fas fa-trash text-gray-400'></i> </a>"+
                                     //"</button>"+
                                  //"</form>"+
                                "</div>"+
