@@ -13,6 +13,8 @@ class AudioClips extends SimpleController {
 	private $fileLocation; // save UPLOADS + current slug
 	private $songIDprint='7';
 	private $k="1";
+	private $username_here;
+	private $counter; //counting var for clip local id-s
 
 	public function __construct() {
 		global $f3;						// needed for $f3->get()
@@ -26,6 +28,10 @@ public function loadLast() {
 	$clip->load();
 	$clip->last();
 	$this->songIDprint=$clip->get('cID');
+		$parts=pathinfo($this->filedata["name"]);
+		$directory=$parts['dirname'].'/'.$f3->get('SESSION.userName');
+		$clip->clipname = $directory ."/audioclip" .($clip->get('cID')) ."." .$parts['extension'];
+	$clip->update();
 	return $this->songIDprint;
 }
 
@@ -34,9 +40,10 @@ public function loadLast() {
 	public function store() {
 		global $f3;			// because we need f3->get()
 		$clip = new DB\SQL\Mapper($f3->get('DB'),$this->cliptable);	// create DB query mapper object
-		$parts=pathinfo($this->filedata["name"]);
-		$clip->clipname = $parts['dirname'] ."/audioclip" .(($this->songIDprint)+1) ."." .$parts['extension'];
-
+			//$parts=pathinfo($this->filedata["name"]);
+			//$directory=$parts['dirname'].'/'.$f3->get('SESSION.userName');
+		//$clip->clipname = $directory ."/audioclip" .(($this->songIDprint)+1) ."." .$parts['extension'];
+		$clip->clipname=$this->filedata["clipname"];
 		$clip->cliptime = $this->filedata["clipTime"];
 		$clip->clipdate = $this->filedata["clipDate"];
 		$clip->clipsize = $this->filedata["size"];
@@ -87,19 +94,97 @@ public function loadLast() {
 		$this->filedata["clipDate"] = $f3->get('POST.clipDate');
 		$this->filedata["songID"] = $f3->get('POST.songID');
 
-		$this->loadLast();
+		//$f3->get("SESSION.userName");
 		$this->store();
-		//EXPERIMENTAL REMOVE this->>
-		$this->renameClips($f3->get("UPLOADS") .$this->filedata["name"], $f3->get("UPLOADS") ."audioclip".$this->songIDprint .".webm");
+		$this->loadLast();
+
+		//rename
+		$this->renameClips($f3->get("UPLOADS") .$this->filedata["name"], $f3->get("UPLOADS") .$f3->get("SESSION.userName") ."/" ."audioclip".($this->songIDprint) .".webm");
 
 		return $this->filedata;
 	}
 
+
 	private function renameClips($oldName, $newName) {
-			//return "thumb-".pathinfo($clipname,PATHINFO_FILENAME).".jpg";
+			global $f3;
+			$targetDir = dirname($newName); // Returns a parent directory's path (operates naively on the input string, and is not aware of the actual filesystem)
+
+	    // check if subfolder exists and create if doesn't. code snippet from Petr - https://stackoverflow.com/questions/2653803/rename-folder-into-sub-folder-with-php
+	    if (!file_exists($targetDir)) {
+	        mkdir($targetDir, 0777, true); // third parameter "true" allows the creation of nested directories
+	    }
+
 			rename ($oldName, $newName);
 	}
 
+	public function loadAllClips($currentID) {
+		global $f3;
+		$returnData = array();
+		$clip=new DB\SQL\Mapper($f3->get('DB'),$this->cliptable);	// create DB query mapper object
+		$list = $clip->find(['songID=?',$currentID]);
+		$this->counter = 0;
+			foreach ($list as $record) {
+				$recordData = array();
+				$recordData["clipID"] = $record["cID"];
+				$recordData["clipname"] = $record["clipname"];
+				$recordData["cliptime"] = $record["cliptime"];
+				$recordData["clipdate"] = $record["clipdate"];
+				$recordData["clipsize"] = $record["clipsize"];
+				$recordData["songID"] = $record["songID"];
+				$this->counter++;
+				$recordData["localClipID"] = $this->counter;
+				array_push(	$returnData, $recordData);
+			}
+			return $returnData;
+
+	}
+
+	// Delete data record about the image, and remove its file and thumbnail file
+	public function deleteClips($currentClipID) {
+		global $f3;
+		$clip=new DB\SQL\Mapper($f3->get('DB'),$this->cliptable);	// create DB query mapper object
+		$clip->load(['cID=?',$currentClipID]);							// load DB record matching the given ID
+		unlink($clip["clipname"]);										// remove the file
+		$clip->erase();													// delete the DB record
+	}
+
+// delete all clips when deleting a song!
+	public function deleteAllClips($currentID) {
+		global $f3;
+		$clip=new DB\SQL\Mapper($f3->get('DB'),$this->cliptable);	// create DB query mapper object
+
+		$clip->load(['songID=?',$currentID]);
+	  while (!$clip->dry()) {
+			 unlink($clip["clipname"]);
+			 $clip->erase();
+			 $clip->next();
+	  }
+
+		// loop + find() wasn't working for some reason
+		//$list=$clip->find(['songID=?',$currentID]);							// load DB record matching the given ID
+  	//foreach ($list as $record) {
+		//	unlink($record["clipname"]); // remove the file
+		//	$clip->erase();						// delete the DB record
+    //}
+
+	}
+
+	//// load single clip - the last entry.
+	public function loadClip() {
+		global $f3;			// because we need f3->get()
+		$clip = new DB\SQL\Mapper($f3->get('DB'),$this->cliptable);	// create DB query mapper object
+		//$clip->clipname = $this->filedata["title"];
+		$clip->load();
+		$clip->last();
+		//$clipData = array();
+		$clipData=$clip->get('cID');
+		// $clipData["clipname"]=$clip->get('clipname');
+		// $clipData["cliptime"]=$clip->get('cliptime');
+		// $clipData["clipdate"]=$clip->get('clipdate');
+		// $clipData["size"]=$clip->get('size');
+		// $clipData["songID"]=$clip->get('songID');
+		return $clipData;
+	}
 
 
 
