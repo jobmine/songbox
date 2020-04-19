@@ -163,7 +163,8 @@
 
                                     	<div id="audiodiv{{ @item.clipID }}">
                                         <audio id="audio{{ @item.clipID }}">
-                                          <source src="{{ @item.clipname }}" type="audio/webm" controls="controls">
+                                          <!-- alt "{{ @BASE }}/getClip/{{ @item.clipID }}" -->
+                                          <source src="{{ @BASE }}/getClip/{{ @item.clipID }}" type="audio/webm" controls="controls">
                                           </source>
                                           Your browser does not support HTML5 audio.
                                         </audio>

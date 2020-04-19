@@ -186,6 +186,19 @@ public function loadLast() {
 		return $clipData;
 	}
 
+	public function showClip($currentClipID) {
+		global $f3;
+		$clip=new DB\SQL\Mapper($f3->get('DB'),$this->cliptable);	// create DB query mapper object
+		$clip->load(['cID=?',$currentClipID]);	// load DB record matching the given ID
+
+		$clipName=$clip->get('clipname');
+		$fileToShow = ($clipName);
+			//$parts=pathinfo($fileToShow);
+			//$name=$parts['basename'] .$parts['extension'];
+		$fileType = ("audio/webm");
+		header('Content-type: ' .$fileType);		// write out the file http header
+		readfile($fileToShow);						// write out raw file contents (image data)
+	}
 
 
 }

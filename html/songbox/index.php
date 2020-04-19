@@ -155,7 +155,12 @@ $f3->route('GET /simpleformReq/deleteClip/@id', // delete clip
 }
 );
 
-
+$f3->route('GET /getClip/@id',
+  function($f3) {
+	$is = new AudioClips;
+	$is->showClip($f3->get('PARAMS.id'));
+  }
+);
 
 
 $f3->route('GET /dashboard', function($f3)
