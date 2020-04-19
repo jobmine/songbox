@@ -10,9 +10,9 @@ class SimpleController {
 
 	public function __construct() {
 		global $f3;						// needed for $f3->get()
-		$this->mapper = new DB\SQL\Mapper($f3->get('DB'),"Songs");	// create DB query mapper object
+		$this->mapper = new DB\SQL\Mapper($f3->get('DB'),"songs");	// create DB query mapper object
 																			// for the "Songs" table
-		$this->loginMapper = new DB\SQL\Mapper($f3->get('DB'),'UserTable'); // create DB query mapper object
+		$this->loginMapper = new DB\SQL\Mapper($f3->get('DB'),'usertable'); // create DB query mapper object
 																	   			// for the 'UserTable' table
 	}
 
