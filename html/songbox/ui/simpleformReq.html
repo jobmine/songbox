@@ -25,7 +25,7 @@
                <i class="fas fa-fw fa-tachometer-alt"></i>
                <span>Dashboard</span></a>
             </li>
-            <hr class="sidebar-divider">
+            <!-- <hr class="sidebar-divider">
             <div class="sidebar-heading">
                Submission One
             </div>
@@ -38,7 +38,7 @@
                <i class="fas fa-fw fa-file-video"></i>
                <span>Video Walkthrough</span>
                </a>
-            </li>
+            </li> -->
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                Users
@@ -81,36 +81,68 @@
                      <h1 class="h3 mb-0 text-gray-800">Edit Song <i class="text-primary">{{@hereThisRecord.songname}}</i></h1>
                   </div>
                   <div class="row">
-                     <div class="col-lg-6 mb-4">
+                     <div class="col-lg-7 mb-4">
                         <!-- Lyrics box -->
                         <div class="card shadow mb-4">
                            <div class="card-header py-3">
                               <!--- --------------------------------------------->
                               <!-- form content is split between multiple divs -->
+                              
                               <form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleformReq">
-                                 <!-- start form -->
+                              <!-- start form -->
+                              <input class="bg-transparent writing m-0 form-control font-weight-bold text-primary no-border border-0" name="songname" type="text" value="{{@hereThisRecord.songname}}" id="songname" size="50">
+                        </div>
+                        <div class="card-body">
+                        <textarea class="bg-transparent m-0 form-control border-0 text-gray-900" name="textarea" rows="10" id="textarea">{{@hereThisRecord.textarea}}</textarea>
+                        <p class="mt-2">Choose a tag:
+                     <!--    <select name="tag" id="tag">
+                           <option {~ if (@hereThisRecord.tag == 'Rock' ) echo  " selected = 'selected' " ;  ~} value="Rock">Rock</option>
+                           <option {~ if (@hereThisRecord.tag == 'Blues' ) echo  " selected = 'selected' " ; ~} value="Blues" >Blues</option>
+                           <option {~ if (@hereThisRecord.tag == 'Pop' ) echo  " selected = 'selected' " ; ~} value="Pop">Pop</option>
+                        </select> -->
+
+
+                        <input type="radio" name="tag" value="Rock" id="Rock" {~ if (@hereThisRecord.tag == 'Rock' ) echo  " checked = 'checked' " ;  ~}><label for="Rock">Rock</label>
+                        <input type="radio" name="tag" value="Blues" id="Blues" {~ if (@hereThisRecord.tag == 'Blues' ) echo  " checked = 'checked' " ;  ~}><label for="Blues">Blues</label>
+                        <input type="radio" name="tag" value="Pop" id="Pop" {~ if (@hereThisRecord.tag == 'Pop' ) echo  " checked = 'checked' " ;  ~}><label for="Pop">Pop</label>
+
+                        </p>
+                        <p class="mb-0 ml-auto text-center">
+                           <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}">
+                           <input class="btn bg-gradient-primary submit-button" type="submit" name="Submit" value="Update" id="submitEditButton" />
+                        </p>
+                        </form> 
+
+
+
+
+                            <!--   <form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleformReq">
                                  <input class="writing m-0 font-weight-bold text-primary no-border border-0" name="songname" type="text" value="{{@hereThisRecord.songname}}" id="songname" size="50">
                            </div>
                            <div class="card-body">
-                             <!-- onfocus inline JS to clear dynamically inserted placeholder -->
-                           <textarea class=" border-0 text-gray-900" onfocus="if(this.value == 'Write down your idea here...') {this.value=''}" name="textarea" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
-                           <!-- undocumented way of inserting php code - f3 framework, brackets + tilda. might not work in some situations? -->
+
+                           
+                           <textarea class=" border-0 text-gray-900"  name="textarea" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
+                           <!-- onfocus inline JS to clear dynamically inserted placeholder -->
+                           <textarea class=" border-0 text-gray-900" name="textarea" onfocus="if(this.value == 'Write down your idea here...') {this.value=''}" rows="5" cols="50" id="textarea">{{@hereThisRecord.textarea}}</textarea>
+
                            <p>Choose a tag:
                            <select name="tag" id="tag">
-                           <option {~ if (@hereThisRecord.tag == "Rock" ) echo  " selected = 'selected' " ;  ~} value="Rock">Rock</option>
-                           <option {~ if (@hereThisRecord.tag == "Blues" ) echo  " selected = 'selected' " ; ~} value="Blues" >Blues</option>
-                           <option {~ if (@hereThisRecord.tag == "Pop" ) echo  " selected = 'selected' " ; ~} value="Pop">Pop</option>
+                           <option {~ if (@hereThisRecord.tag == 'Rock' ) echo  " selected = 'selected' " ;  ~} value="Rock">Rock</option>
+                           <option {~ if (@hereThisRecord.tag == 'Blues' ) echo  " selected = 'selected' " ; ~} value="Blues" >Blues</option>
+                           <option {~ if (@hereThisRecord.tag == 'Pop' ) echo  " selected = 'selected' " ; ~} value="Pop">Pop</option>
                            </select>
+                           <!-- inserting php code - f3 framework, brackets + tilda. -->
                            </p>
                            <p>
-                           <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}">               <!-- //hidden record that passes on the #id value -->
+                           <input type="hidden" name="toEdit" value="{{@hereThisRecord.id}}"> 
                            <input class="create-btn" type="submit" name="Submit" value="Submit" id="submitEditButton" />
                            </p>
-                           </form>                                                                     <!-- end form -->
+                           </form>  -->     
                            </div>
                         </div>
                      </div>
-                     <div class="col-lg-6 mb-4">
+                     <div class="col-lg-5 mb-4">
                         <!-- Record Audio Button -->
                         <a href="#"  id="recordButton" class="btn btn-success btn-icon-split mb-4">
                         <span class="icon text-white-50">
@@ -178,10 +210,10 @@
                </div>
             </div>
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <footer class="sticky-footer">
                <div class="container my-auto">
                   <div class="copyright text-center my-auto">
-                     <span>Copyright &copy; SongBox 2020</span>
+                     <span>&copy; SongBox / <a target="_blank" href="{{ @BASE }}/SongBox.pdf">PDF Report</a> / <a target="_blank" href="{{ @BASE }}/SongBox.mp4">Video Walkthrough</a></span>
                   </div>
                </div>
             </footer>
