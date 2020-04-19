@@ -176,11 +176,11 @@
 
                                  <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> {{ @item.cliptime}} | {{ @item.clipdate}}
+                                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 form-inline"> {{ @item.cliptime}} | {{ @item.clipdate}}
                                          <form class="sameline" id="deleteClipForm" name="deleteClipForm" method="GET" action="{{ @BASE }}/simpleformReq/deleteClip/{{@item.clipID}}">
                                             <!-- <input class="btn p-0 pr-4" type="hidden" name="toDeleteClip" value="{{@item.clipID}}"> -->
                                             <input type="hidden" name="songID" value="{{@hereThisRecord.id}}">
-                                            <button class="transparent pr-3" id="deleteClipButton" type="submit" name="deleteClip">
+                                            <button class="transparent pr-3 pl-3" id="deleteClipButton" type="submit" name="deleteClip">
                                             <i class="fas fa-trash text-gray-400"></i>
                                             </button>
                                          </form>
