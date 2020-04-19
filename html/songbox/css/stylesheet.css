@@ -196,7 +196,7 @@ a {
 }
 
 a:hover {
-  color: #224abe;
+  /*color: #224abe;*/
 }
 /*
 a:not([href]):not([tabindex]) {
@@ -11304,16 +11304,4 @@ body.sidebar-toggled footer.sticky-footer {
 .transparent {
   background-color: transparent;
   border: none;
-}
-
- /* slider custom css  */
-.hp_slide{
-    width:100%;
-    background:white;
-    height:25px;
-}
-.hp_range{
-    width:0;
-    background:black;
-    height:25px;
 }
