@@ -42,7 +42,7 @@
                         <div class="alert alert-info " role="alert"><?= $reg_err_msg ?></div>
                         <p class="pb-2"><?= $reg_err_msgspan ?></p>
                      </div>
-                     <input type="submit" name="submit" value="Register" class="btn btn-primary btn-user btn-block">
+                     <input type="submit" name="submit" value="Register" class="btn btn-primary btn-user btn-block login-signup">
                   </form>
                   <hr>
                   <div class="text-center">
