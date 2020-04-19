@@ -5,6 +5,8 @@
 class SimpleController {
 	private $mapper;
 	private $loginMapper;
+	private $user_global;
+	private $songID; // used in putIntoDatabase function
 
 	public function __construct() {
 		global $f3;						// needed for $f3->get()
@@ -14,17 +16,43 @@ class SimpleController {
 																	   			// for the 'UserTable' table
 	}
 
+// Visiting the Create song page creates a song entry with default data.
 	public function putIntoDatabase($data) {
 		$this->mapper->songname = $data["songname"];					// set value for "name" field
 		$this->mapper->textarea = $data["textarea"];				// set value for "colour" field
 		$this->mapper->tag = $data["tag"];				// set value for "address" field
+		$this->mapper->username = $data["username"];
 		$this->mapper->save();									// save new record with these fields
 	}
 
-	public function getData() {
-		$list = $this->mapper->find();
+	public function loadLastSong() {
+		// load song ID of last record
+		$this->mapper->load();
+		$this->mapper->last();
+		$this->songID=$this->mapper->get('id');
+		return $this->songID;
+	}
+
+// Save data when "Save and submit"
+	public function updateDatabase($data) {
+		$this->mapper->songname = $data["songname"];					// set value for "name" field
+		$this->mapper->textarea = $data["textarea"];				// set value for "colour" field
+		$this->mapper->tag = $data["tag"];				// set value for "address" field
+		//$this->mapper->username = $data["username"];
+		$this->mapper->update();									// save new record with these fields
+	}
+
+	public function getData($un) {
+		$list = $this->mapper->find(['username=?', $un]);
 		return $list;
 	}
+
+	//public function loadLastRecord() {
+	//	global $f3;
+	//	$this->loginMapper->load();
+	//	$this->loginMapper->last();
+	//	$this->$user_global=$this->loginMapper->get('Username');				// set username FK in songs table
+	//}
 
 	public function deleteFromDatabase($idToDelete) {
 		$this->mapper->load(['id=?', $idToDelete]);				// load DB record matching the given ID
@@ -51,9 +79,9 @@ class SimpleController {
 		return $auth->login($user, $pwd);
 	}
 
-	// Function to register a user 
+	// Function to register a user
 	public function registerUser($user, $pwd, $f_name, $l_name, $re_pwd) {
-		
+
 		// Check if the fileds are valid (null or password does not match)
 		if ($user == null || $user == '' || $pwd == null || $pwd == '') {
 			return 0;
@@ -69,11 +97,11 @@ class SimpleController {
 		$this->loginMapper->FirstName = $f_name;
 		$this->loginMapper->LastName = $l_name;
 		try {
-    		return $this->loginMapper->save();		
+    		return $this->loginMapper->save();
 		} catch (\PDOException $e) {
 		    return 0;
 		}
-		
+
 	}
 
 	// Function to load user info after a successful login
